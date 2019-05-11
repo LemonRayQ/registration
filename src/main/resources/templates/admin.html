@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<style>
+    body {
+        padding: 0px 50px;
+        background-image: url('./img/bgi.jpg');
+        background-size: cover;
+    }
+
+    .no-click {
+        /*cursor: not-allowed;*/
+        pointer-events: none;
+    }
+
+    .student-container {
+        display: flex;
+        height: 450px;
+        width: 100%;
+    }
+
+    .left {
+        width: 30%;
+        height: 100%;
+    }
+
+    .right {
+        width: 70%;
+        height: 100%;
+
+    }
+
+    #upload {
+        display: none;
+
+    }
+
+    .uploadFile {
+        display: inline-block;
+        width: 110px;
+        height: 60px;
+        border: 1px dashed #e5e5ee;
+        text-align: center;
+        line-height: 60px;
+        font-size: 18px;
+        font-family: '楷体';
+        color: gray;
+        border-radius: 10px;
+        margin: 0px;
+    }
+
+    .uploadFile:hover {
+        cursor: pointer;
+        border: 1px dashed rgb(51, 133, 255);
+        color: rgb(51, 133, 255);
+        transition: .5s border;
+    }
+</style>
+
+<body>
+
+<div class="page-header">
+    <h1 style='color: cornflowerblue'>管理员界面
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 ">
+        <div class="student-container">
+            <div class="left">
+                <div style="text-align:center;">
+                    <br/>
+                    <h4>姓名:<span th:text="${adminInfo.getName()}"></span></h4>
+                    <br/>
+                    <h4>手机号:<span th:text="${adminInfo.getId()}"></span></h4>
+                    <br/>
+                    <h4><a href="#" data-toggle="modal" data-target=".edit-info">编辑个人信息</a></h4>
+                    <br/>
+                    <h4><a th:href="@{/logout}">退出登录</a></h4>
+
+                    <div class="modal fade edit-info" tabindex="-1" role="dialog"
+                         aria-labelledby="mySmallModalLabel">
+                        <div class="modal-dialog modal-sm " role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
+                                </div>
+                                <div class="modal-body" th:id="adminModel">
+                                    <form action="" method="POST" class="form-horizontal" role="form"
+                                          th:id="updateAdminInfo">
+                                        <div class="form-group">
+                                            <label for="adminId">手机号</label>
+                                            <input type="text" class="form-control" th:value="${adminInfo.getId()}"
+                                                   th:name="id" id="adminId"
+                                                   placeholder="请输入手机号">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="adminName">姓名</label>
+                                            <input type="text" class="form-control" th:value="${adminInfo.getName()}"
+                                                   th:name="name" id="adminName"
+                                                   placeholder="请输入姓名">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="adminPwd">密码</label>
+                                            <input type="password" class="form-control"
+                                                   th:value="${session.userPwd.getPassword()}" th:name="password"
+                                                   id="adminPwd"
+                                                   placeholder="请输入密码">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="adminIdcard">身份证</label>
+                                            <input type="text" class="form-control" th:value="${adminInfo.getIdcard()}"
+                                                   th:name="idcard" id="adminIdcard"
+                                                   placeholder="请输入身份证号码">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary" onclick="updateAdmin1()">修改
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="right">
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="myTabs">
+                        <li role="presentation" class="active" onclick="foo(this)"><a href="#home"
+                                                                                      aria-controls="home" role="tab"
+                                                                                      data-toggle="tab">科室管理</a></li>
+                        <li role="presentation" onclick="foo(this)"><a href="#notes" aria-controls="notes"
+                                                                       role="tab" data-toggle="tab">添加医生</a></li>
+                        <li role="presentation" onclick="foo(this)"><a href="#verify" aria-controls="verify"
+                                                                       role="tab" data-toggle="tab">审核</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                            <br/>
+                            <div class="panel panel-default">
+                                <div class="patient-container">
+                                    <div class="patient-container-item" th:each="dept:${departments}">
+                                        <div class="patient-container-left" th:text="${dept.getName()}">
+                                            我是科室
+                                        </div>
+                                        <div class="patient-container-right">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target=".bs-example-modal-lg" th:id="${dept.getId()}"
+                                                    onclick="selectDocByDid(this)">查看
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Table -->
+                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                     aria-labelledby="myLargeModalLabel" id="deptModel">
+
+                                    <div class="modal-dialog modal-lg" role="document">
+
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span
+                                                        aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">修改医生信息</h4>
+                                            </div>
+                                            <div class="modal-body" id="adminQuery">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpane2" class="tab-pane" id="notes">
+                            <form th:type="post" id="insertDocForm">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">医生手机号</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                           name="id" placeholder="输入添加的手机号">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName">医生姓名</label>
+                                    <input type="text" class="form-control" id="exampleInputName"
+                                           name="name" placeholder="输入添加的医生姓名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputDept">所属科室</label>
+                                    <select class="form-control" id="exampleInputDept" th:name="deptId">
+                                        <option th:each="depts:${departments}"
+                                                th:value="${depts.getId()}"
+                                                th:text="${depts.getName()}"></option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="insert()">添加</button>
+                            </form>
+                            <hr>
+                            <!-- <div class="doctorAdmin">
+                                 <div class="doctorAdmin-item">
+                                     <span>医生姓名</span>
+                                     <span>科室名称</span>
+                                     <button class="btn btn-danger">删除</button>
+                                 </div>
+
+                                 <div class="doctorAdmin-item">
+                                     <span>医生姓名</span>
+                                     <span>科室名称</span>
+                                     <button class="btn btn-danger">删除</button>
+                                 </div>
+                             </div>-->
+                        </div>
+                        <div role="tabpane3" class="tab-pane" id="verify">
+                            <br/>
+                            <div class="panel panel-default">
+                                <div class="patient-container">
+                                    <div class="patient-container-item" th:each="verified:${verify}">
+                                        <div class="patient-container-left" th:text="${verified.getId()}">
+                                            我是科室
+                                        </div>
+                                        <div class="patient-container-right">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target=".bs-example-modal-lg" th:id="${verified.getId()}"
+                                                    onclick="passVerify(this)">通过
+                                            </button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                    data-target=".bs-example-modal-lg" th:id="${verified.getId()}"
+                                                    onclick="refuseVerify(this)">拒绝
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="./js/userinfo/userinfo.js" th:src="@{/js/userinfo/userinfo.js}"></script>
+<script src="./js/admin/admin.js" th:src="@{/js/admin/admin.js}"></script>
+<script>
+    var tabList = $("#myTabs");
+
+    $('#myTabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show')
+
+    });
+
+    function foo(e) {
+
+        var liList = tabList.find("li");
+        for (var i = 0; i < liList.length; i++) {
+            liList[i].removeAttribute('class');
+        }
+
+        e.className = "active";
+
+    }
+
+    //foo();
+</script>
+
+</html>

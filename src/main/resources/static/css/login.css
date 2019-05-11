@@ -1,0 +1,62 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    background-size: cover;
+    background-color: #e5e5e5;
+    background-image: url(../img/2.jpg);
+}
+.container-fluid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+
+    z-index: 5;
+}
+/* 登录界面的样式 */
+.login-content{
+    width:400px;
+    min-height: 300px; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: -200px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.1);
+    box-shadow: white 0px 0px 5px;
+}
+.login-content .logo{
+    font-weight: 700;
+    color: white;
+}
+.login-content .login-form{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.login-content .login-form .form-group{
+    width:300px ;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.login-content .login-form .input-group{
+    width: 100%;
+}
+
+form{
+    width: 70%;
+}
+label{
+    margin-bottom: 0px;
+}
+.account,.pas{
+    margin-bottom: 10px;
+}

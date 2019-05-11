@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 引入bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="login-content">
+        <!-- logo或者字体样式 -->
+        <div class="logo">
+            <h1>攀医挂号系统</h1>
+        </div>
+        <!-- 登录界面的样式 -->
+        <div class="login-form">
+            <form action="#" method="POST" role="form" th:action="@{/Dlogin}" th:id="loginData">
+                <div class="account">
+                    <label for="username" th:text="手机号"></label>
+                    <input type="text" class="form-control" id="username" th:name="id" placeholder="请输入账号">
+                </div>
+                <div class="pas">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" th:name="password" placeholder="请输入密码">
+                </div>
+                <div class="pas">
+                    <label class="radio-inline">
+                        <input type="radio" name="identity" id="inlineRadio1" value="0" checked="checked"> 病人
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="identity" id="inlineRadio2" value="1"> 医生
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="identity" id="inlineRadio3" value="2"> 管理员
+                    </label>
+                </div>
+                <input type="submit" class="form-control btn btn-success " id="exampleInputAmount1" value="登录"/>
+                <button type="button" style="margin-top:10px" class="form-control btn btn-primary" id="btn" th:text="注册"
+                        onclick="register2()"/>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/register/register.js"></script>
+
+</html>

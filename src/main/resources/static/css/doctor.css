@@ -1,0 +1,179 @@
+@CHARSET "UTF-8";
+
+.w {
+    width: 1240px;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+current {
+    display: block;
+}
+
+/*top开始*/
+.top {
+    margin-top: 30px;
+    height: 81px;
+
+}
+
+.left {
+    height: 81px;
+    width: 458px;
+    margin: 0 70px 0 15px;
+}
+
+.center {
+    height: 81px;
+    width: 300px;
+    margin-left: 50px;
+    line-height: 81px;
+}
+
+.right {
+    height: 81px;
+    width: 170px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+}
+
+.right a {
+    text-decoration: none;
+    color: #ccc;
+    margin: 10px 10px 0 0;
+    font-weight: 700;
+}
+
+/*top结束*/
+/*workdate开始*/
+.workdate,
+.mypatient,
+.feedback {
+    margin-top: 20px;
+}
+
+.workdate .content,
+.mypatient .content,
+.feedback .content {
+    background: url("../img/tab_bg.png") repeat-y;
+    height: 50px;
+    padding-left: 10%;
+    font: 700 20px/50px "micsoft yahei";
+    color: #000;
+}
+
+/*workdate结束*/
+
+/*mypatient开始*/
+.allpatient,
+.allfeedback {
+    margin-top: 20px;
+}
+
+.head th {
+    background-color: #bbbbbb;
+}
+
+.head th, .body td {
+    width: 248px;
+    height: 40px;
+    text-align: center;
+    font: 700 20px/40px "simsun";
+}
+
+.body .Check {
+    cursor: pointer;
+}
+
+/*mypatient结束*/
+
+/*checkill开始*/
+.checkillBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 420px;
+    margin-top: -210px;
+    margin-left: -200px;
+    background-color: #ccc;
+    border: 2px solid #000;
+}
+
+.exit {
+    cursor: pointer;
+    height: 20px;
+    width: 395px;
+    background-color: #777;
+    color: #000;
+    float: right;
+    padding-right: 5px;
+    text-align: right;
+    font: 700 20px/20px "simsun";
+}
+
+.checkill {
+    width: 400px;
+    height: 400px;
+
+    margin: 20px auto 0 auto;
+}
+
+.checkill input {
+    height: 30px;
+    width: 200px;
+
+    font: 400 16px/30px "simsun";
+}
+
+.checkill textarea {
+    margin-top: 5px;
+    margin-left: 8px;
+    line-height: 30px;
+    padding-left: 2em;
+    font: 400 16px/30px "simsun";
+}
+
+/*checkill结束*/
+
+/*feedback开始*/
+
+.feedhead th {
+    background: #bbbbbb;
+}
+
+.feedhead th, .feedbody td {
+    width: 248px;
+    height: 40px;
+    text-align: center;
+
+    font: 700 20px/40px "simsun";
+}
+
+.feedhead .doubleW {
+    width: 496px;
+}
+.case-content textarea{
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+.case-content .btn{
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+/*feedback结束*/
+	

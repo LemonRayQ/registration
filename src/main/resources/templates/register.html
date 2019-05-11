@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+
+<body>
+<div class=" container">
+    <div class="page-header">
+        <h1>攀医系统注册界面</h1>
+    </div>
+    <div class="form-container">
+        <form action="#" method="POST" class="form-horizontal" id="registerData" role="form" th:action="@{/Dregister}">
+            <div class="form-group">
+                <label for="phone">手机号</label>
+                <input type="text" class="form-control" id="phone" th:name="id" placeholder="请输入手机号">
+            </div>
+
+            <div class="form-group" th:if="${session.registerIdentity!=1}">
+                <label for="username">姓名</label>
+                <input type="text" class="form-control" id="username" th:name="username" placeholder="请输入姓名">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" th:name="password" placeholder="请输入密码">
+            </div>
+            <div class="form-group" th:if="${session.registerIdentity!=1}">
+                <label for="selectSex">性别</label>
+                <select name="sex" id="selectSex" class="form-control">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div class="form-group" th:if="${session.registerIdentity!=1}">
+                <label for="age">年龄</label>
+                <input type="text" class="form-control" id="age" th:name="age" placeholder="请输入年龄">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" th:value="注册"/>
+                <button type="button" class="btn" onclick="window.location.href='/login'">返回</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+</body>
+<script src='./js/jquery-3.3.1.min.js'></script>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/register/register.js"></script>
+
+</html>

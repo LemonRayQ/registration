@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/doctor.css">
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<!--top开始-->
+<div class="top">
+    <div class="w">
+        <div class="left fl">
+            <img src="../img/logo.jpg" alt="">
+        </div>
+        <div class="center fl ">
+            <h1>
+                医生查询系统
+            </h1>
+        </div>
+        <div class="right fr">
+            <a href="" data-toggle="modal" data-target=".edit-message">编辑个人信息</a>
+            <a th:href="@{/logout}" th:text="退出登录"></a>
+        </div>
+        <div class="modal fade edit-message" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">编辑个人信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="case-container">
+                            <div class="case-content">
+
+                                <form action="" method="POST" role="form" id="updateDocInfo">
+
+                                    <div class="form-group">
+                                        <label for="docId">手机号</label>
+                                        <input type="text" class="form-control" id="docId" name="newId"
+                                               placeholder="请输入更改的手机号" th:value="${doctorinfo.getId()}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">姓名</label>
+                                        <input type="text" class="form-control" name="username" id="username"
+                                               placeholder="请输入姓名" th:value="${doctorinfo.getName()}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">密码</label>
+                                        <input type="password" class="form-control" id="password" th:name="newPwd"
+                                               placeholder="请输入新密码" name="newPwd"
+                                               th:value="${session.userPwd.getPassword()}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="intro">医生简介</label>
+                                        <input type="text" class="form-control" id="intro" name="intro"
+                                               placeholder="请输入简介" th:value="${doctorinfo.getIntro()}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="idcard">身份证号码</label>
+                                        <input type="text" class="form-control" id="idcard" name="idcard"
+                                               placeholder="请输入身份证号码" th:value="${doctorinfo.getIdcard()}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="selectSex">性别</label>
+                                        <select name="sex" id="selectSex" class="form-control"
+                                                th:value="${doctorinfo.getSex()}">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="age">年龄</label>
+                                        <input type="text" class="form-control" id="age" th:name="age"
+                                               placeholder="请输入年龄" th:value="${doctorinfo.getAge()}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dept">所属科室</label>
+                                        <select class="form-control" id="dept" th:name="deptId">
+                                            <option th:each="depts:${dept}"
+                                                    th:value="${depts.getId()}"
+                                                    th:text="${depts.getName()}"
+                                                    th:if="${depts.getId()==doctorinfo.getDeptId()}"
+                                                    selected="selected"></option>
+                                            <option th:each="depts:${dept}"
+                                                    th:value="${depts.getId()}"
+                                                    th:text="${depts.getName()}"
+                                                    th:if="${depts.getId()!=doctorinfo.getDeptId()}"></option>
+                                        </select>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" onclick="updateDocInfo1()">编辑</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--top结束-->
+<!--workdate开始-->
+<div class="workdate clearfix" id="workdate">
+    <div class="content">工作安排</div>
+    <div class="w">
+    </div>
+</div>
+<!--workdate结束-->
+
+<!--mypatient结束-->
+<div class="mypatient" id="mypatient">
+    <div class="content">我的病人</div>
+    <div class="w">
+        <table border="1" cellspacing="0" class="allpatient">
+            <tr class="head">
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>电话</th>
+                <th>病例编写</th>
+            </tr>
+
+            <tr class="body" th:each="patientinfo:${patientInfos}">
+                <td th:text="${patientinfo.getName()}"></td>
+                <td th:text="${patientinfo.getSex()}"></td>
+                <td th:text="${patientinfo.getAge()}"></td>
+                <td th:text="${patientinfo.getId()}"></td>
+                <td>
+                    <a data-toggle="modal"
+                       data-target=".bs-example-modal-lg" th:id="${patientinfo.getId()}"
+                       onclick="writeIllness(this)">病例编写
+                    </a>
+                </td>
+            </tr>
+
+        </table>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+             th:id="submitIllness" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" style="min-height: 250px">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabe">病例编写</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="case-container">
+                            <div class="case-content">
+                                 <textarea placeholder="请编辑病例" id="illnessContent"
+                                           class="form-control"
+                                           rows="5"
+                                           required="required"></textarea>
+                                <button type="button" class="btn btn-primary" th:id="${session.pId}"
+                                        onclick="submitIllness(this)">提交
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--mypatient结束-->
+
+<!--checkill开始-->
+<div class="checkillBox  hide" id="checkillBox">
+    <div class="exit" id="exit"> ×</div>
+    <div class="checkill">
+        姓名：
+        <div style="margin-left:40px;"></div>
+        性别：
+        <div style="margin-left:40px;"></div>
+        年龄：
+        <div style="margin-left:40px;"></div>
+        病情描述：<br>
+
+
+    </div>
+</div>
+
+
+<!--checkill结束-->
+
+<!--feedback开始-->
+<div class="feedback">
+    <div class="content">病人反馈</div>
+    <div class="w">
+        <table border="1" cellspacing="0" class="allfeedback">
+            <tr class="feedhead">
+                <th>手机号</th>
+                <th>姓名</th>
+                <th class="doubleW">信息反馈</th>
+            </tr>
+
+            <tr class="body" th:each="patientinfo:${patientInfos}">
+                <td th:text="${patientinfo.getId()}">病人ID</td>
+                <td th:text="${patientinfo.getName()}">病人姓名</td>
+                <td><a data-toggle="modal" data-target=".message" th:id="${patientinfo.getId()}"
+                       onclick="showFeedBack1(this)">信息反馈</a></td>
+            </tr>
+
+        </table>
+        <div class="modal fade message" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             th:id="showFeedBack">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel1">信息反馈内容</h4>
+                    </div>
+                    <div class="modal-body" id="feedBackContent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--feedback结束-->
+</body>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/userinfo/userinfo.js" th:src="@{/js/userinfo/userinfo.js}"></script>
+<script src="../js/doctor/doctorQuery.js" th:src="@{/js/doctor/doctorQuery.js}"></script>
+</html>

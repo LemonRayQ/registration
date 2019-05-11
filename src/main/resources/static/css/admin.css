@@ -1,0 +1,129 @@
+.patient-container {
+    width: 100%;
+    height: auto;
+}
+
+.patient-container-item {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #e5e5ee;
+}
+
+.patient-container-left {
+    width: 70%;
+    height: 100%;
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 700px !important;
+}
+
+.modal-body {
+    width: 100%;
+    min-height: 300px;
+}
+
+.modal-body-item {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.panel .panel-default {
+    width: 100%;
+}
+
+
+
+.message-content {
+    width: 100%;
+    min-height: 300px;
+    padding: 20px 0;
+}
+
+.message-content .form-group {
+    width: 100%;
+    margin: 0px;
+}
+
+.message-content .form-group textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+.message-content button {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.modal-dialog .form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.modal-dialog .form-group label {
+    width: 20%;
+}
+
+.modal-dialog .form-group input {
+    flex: 1
+}
+.media{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.media>.media-body{
+    flex: 1;
+}
+.media>button{
+    width: 75px;
+}
+
+.media-left a {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.media-left a img {
+    width: 100%;
+}
+.doctorAdmin{
+    width: 100%;
+    height: auto;
+    padding: 20px 0px;
+}
+.doctorAdmin-item{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+.doctorAdmin-item>span{
+    font-size: 20px;
+}
