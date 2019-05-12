@@ -36,7 +36,7 @@ public interface PatientMapper {
      * @author: Lemon-grass
      * @date: 2019/5/5
      */
-    @Select("SELECT content FROM ${tableName} WHERE p_id= #{pId}  ORDER BY content DESC LIMIT 1")
+    @Select("SELECT content FROM ${tableName} WHERE p_id= #{pId}  ORDER BY id DESC LIMIT 1")
     String selectFeedBackOrIllness(@Param("tableName") String tableName, @Param("pId") String pId);
 
 
